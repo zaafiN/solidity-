@@ -1,4 +1,4 @@
-pragma solidity ^0.6.6;
+pragma solidity ^0.6.8;
 //0xCA35b7d915458EF540aDe6068dFe2F44E8fa733c
 import "./IERC20.sol";
 import "./SafeMath.sol";
@@ -157,23 +157,29 @@ import "./SafeMath.sol";
      * Requirements:
      * - the caller must have Owner of Contract
      * - amount should be valid incremental value.
+     * - minted tokens must not cause the total supply to go over the cap.
      */
     function mint(address minter,uint256 amount) public onlyOwner returns(uint256) {
-        require(amount < 0, "BCC1: Invalid amount.Minted amount should be greater than 0");
-        require (minter != address(0), "BCC1: Invalid address");
-        _beforeTokenTransfer(address(0), minter, amount);
+        require(amount > 0, "BCC1: Invalid amount.Minted amount should be greater than 0");
+        require (minter != address(0), "BCC1: mint to the zero address");
+        require(_totalSupply.add(amount) <= _cap, "BCC1: cap exceeded");
+       // _beforeTokenTransfer(address(0), minter, amount);
         _totalSupply = _totalSupply.add(amount);
         _balances[minter] = _balances[minter].add(amount);
+        emit Transfer(address(0), minter, amount);
+    
     }
     
-    function _beforeTokenTransfer(address from, address to, uint256 amount) internal view virtual {
-         require(totalSupply().add(amount) <= _cap, "ERC20Capped: cap exceeded");
-    }
+  //  function _beforeTokenTransfer( address from, address to, uint256 amount) internal view virtual {
+        //if (from == address(0)) { // When minting tokens
+
+       // require(totalSupply().add(amount) <= _cap, "BCC1: cap exceeded");
+       // }
+    //}
 
    
     modifier onlyOwner(){
         require(msg.sender == owner,"BCC1: Only owner can execute this feature");
-         
         _;
     }
-  }                    
+  }          
