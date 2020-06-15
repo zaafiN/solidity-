@@ -29,8 +29,8 @@ contract BuyableTokenWithRefund is IERC20{
     
  
     constructor () public {
-        name = "Rocket";
-        symbol = "RKT";
+        name = "RefundableToken";
+        symbol = "BCC1";
         decimals = 18;
         owner = msg.sender;
         weiReceipt = 0x93E2Ec2BD2c5C17e1E44ABaCCa955a26B319c7Ca;
