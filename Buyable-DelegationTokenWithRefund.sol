@@ -227,29 +227,6 @@ contract MyBuyableExToken is IERC20 {
         return true;
     }
     
-  /**  function buyToken(address payable buyer) public payable returns(bool) {
-        address _recipient = msg.sender;
-        
-        require(Address.isContract(_recipient) == false, "MyBuyableExToken: Buyer cannot be a contract");
-        require(_recipient != address(0), "MyBuyableExToken: transfer to the zero address");
-        require(msg.value > 0, "MyBuyableExToken: amount must be valid");
-        
-        uint256 _numberOfWeiTokens = (msg.value.mul(10**decimals)).div(tokenPrice);
-       
-        require(_numberOfWeiTokens > 0, "MyBuyableExToken: number of tokens must be valid");
-        require(_balances[contractOwner] >= _numberOfWeiTokens, "MyBuyableExToken: insufficient tokens");
-        
-        //decrease the balance of tokens of contractOwner
-        _balances[contractOwner] = _balances[contractOwner].sub(_numberOfWeiTokens); 
-        
-        //increase the balance of token recipient account
-        _balances[_recipient] = _balances[_recipient].add(_numberOfWeiTokens);
-    
-        timeOfBoughtTokens[_recipient] = block.timestamp;
-        
-        emit TokensSold(contractOwner, _recipient, _numberOfWeiTokens);
-        return true;
-    }**/
     
         // struct to record buying details 
     struct BuyDetails {
