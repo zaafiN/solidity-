@@ -336,8 +336,8 @@ contract MyBuyableExToken is IERC20 {
         require(tokenOwner != address(0), "MyBuyableExToken: caller cannot be zero address");
         require(_balances[tokenOwner] >= _numberOfWeiTokens, "MyBuyableExToken: caller is either not the tokenOwner or has insufficient balance");
         
-        require(block.timestamp <= (timeOfBoughtTokens[tokenOwner]).add(300), "MyBuyableExToken: Return only possible within the limited time"); //1 month = 2592000 secs
-        //                                                              ^ 5 min
+        require(block.timestamp <= (timeOfBoughtTokens[tokenOwner]).add(2592000), "MyBuyableExToken: Return only possible within the limited time"); //1 month = 2592000 secs
+                                                                     
         
         //converts numberOfTokens to value(money) based on current tokenPrice
         uint256 _amount = _numberOfWeiTokens.mul(10**decimals).div(tokenPrice);
