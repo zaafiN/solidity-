@@ -142,7 +142,7 @@ contractOwner = msg.sender;
     
 
 modifier whenNotPaused() {
-    require(ensure the contract has not been paused when performing this action)
+    require(ensure the contract has not been paused when performing this action);
     _;
 }
 
@@ -183,7 +183,7 @@ emit Received(msg.sender, _tokenId, msg.value, address(this).balance);
 }
 
 modifier onlyOwner(){
-    require(msg.sender == contract's owner)
+    require(msg.sender == contract's owner);
     _;
 }
 
