@@ -47,7 +47,7 @@ event Received(address indexed payer, uint tokenId, uint256 amount, uint256 bala
     uint256 public currentPrice;
     string private _baseURI;
 
-constructor(address _nftAddress) ERC721("Zameen", "ZMN") public {
+constructor(address _nftAddress) ERC721("cryptoarte", "CA") public {
 require(_nftAddress != address(0) && _nftAddress != address(this));
 //require(_currentPrice > 0);
 nftAddress = ERC721(_nftAddress);
@@ -142,6 +142,7 @@ contractOwner = msg.sender;
     
 
 modifier whenNotPaused() {
+    require(ensure the contract has not been paused when performing this action)
     _;
 }
 
@@ -182,6 +183,7 @@ emit Received(msg.sender, _tokenId, msg.value, address(this).balance);
 }
 
 modifier onlyOwner(){
+    require(msg.sender == contract's owner)
     _;
 }
 
@@ -209,7 +211,7 @@ currentPrice = _currentPrice;
        msg.sender.transfer(msg.value);
    }
    
-     fallback() external payable{
+     fallback() external {
              
         }
     
