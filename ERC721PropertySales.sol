@@ -146,7 +146,7 @@ modifier whenNotPaused() {
 }
 
  //function to accept a bid
- function acceptBid (uint _tokenId ) public payable {
+ function acceptBid () public payable {
      require (_tokenOwners[_tokenId] == msg.sender); // to ensure that only token owner can accept a bid
      payable(msg.sender).transfer(_highestBid[_tokenId]); // transfer ether from contract address to property owner
      safeTransferFrom(msg.sender,  _highestBidder[_tokenId], _tokenId); //change of ownership, transfer tokenId to bidder
